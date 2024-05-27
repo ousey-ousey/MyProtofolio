@@ -1,15 +1,18 @@
 import { useState } from "react";
 import "./main.css";
 import { motion } from "framer-motion";
-const myprojects = [
-  { title: "landing company", category: "css", imgpath: "a" },
-  {
-    title: "javascript2",
-    category: ["JS", "tailwind"],
-    imgpath: "a",
-  },
-  { title: "javascript1", category: "JS", imgpath: "a" },
-  { title: "Racto", category: "React", imgpath: "a" },
+import myprojects from "./projects.js";
+
+const images = [
+  "./images/Weather.jpg",
+  "./images/bar-success.jpg",
+  "./images/FQRs.jpg",
+  "./images/calc.jpg",
+  "./images/qr-code-gene.jpg",
+  "./images/random-pass.jpg",
+  "./images/random-color.jpg",
+  "./images/age-calc.jpg",
+  // @ts-ignore
 ];
 export default function Main() {
   const [active, setactive] = useState("all");
@@ -23,9 +26,10 @@ export default function Main() {
 
     setarr(newarr);
   };
+
   return (
     <main className="flex">
-      <section className="left-section ">
+      <section className="left-section">
         <button
           onClick={() => {
             setactive("all");
@@ -69,8 +73,8 @@ export default function Main() {
           tailwind
         </button>
       </section>
-      <section id="maincont" className="flex right-section ">
-        {arr.map((item, index) => {
+      <section id="maincont" className="flex right-section">
+        {arr.map((item) => {
           return (
             <motion.article
               initial={{ scale: 0 }}
@@ -80,25 +84,28 @@ export default function Main() {
                 stiffness: 260,
                 damping: 20,
               }}
-              key={index}
-              className="card "
+              key={item.id}
+              className="card"
             >
               <div id="BOX">
-                <img src="../../../public/3.jpg" width={270} />
-                <div className="box " style={{ width: 270 }}>
+                <div
+                  style={{
+                    width: "268px",
+                    height: "200px", // Ensure the div has height for the background image
+                    backgroundImage: `url(${item.imgpath})`,
+                    backgroundSize: "cover", // Ensure the image covers the div
+                    backgroundPosition: "center", // Center the image
+                  }}
+                />
+                <div className="box" style={{ width: 270 }}>
                   <h2>{item.title}</h2>
-                  <p className="sub-title">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Eius facere aliquid vel error unde beatae architecto sunt
-                    possimus nisi porro sint facilis quasi, ad aperiam
-                    voluptates accusamus amet labore laboriosam.
-                  </p>
+                  <p className="sub-title">{item.P}</p>
                   <div className="flex icons">
                     <div style={{ gap: "11px" }} className="flex">
                       <span className="icon-link"></span>
                       <span className="icon-github"></span>
                     </div>
-                    <a href="" id="linko" className="flex">
+                    <a href={item.git} id="linko" className="flex">
                       more
                       <span className="icon-arrow-right"></span>
                     </a>
